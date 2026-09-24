@@ -1,15 +1,6 @@
 # Multispectral Point Cloud Registration and 3D Reconstruction
 
 <p align="center">
-  <a href="https://github.com/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square&logo=github&label=Stars"></a>
-  <a href="https://github.com/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square&logo=github&label=Forks"></a>
-  <a href="https://github.com/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction/issues"><img alt="Issues" src="https://img.shields.io/github/issues/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square&logo=github&label=Issues"></a>
-  <a href="https://github.com/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square&logo=git&label=Last%20commit"></a>
-  <img alt="Code size" src="https://img.shields.io/github/languages/code-size/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square&label=Code%20size">
-  <img alt="Top language" src="https://img.shields.io/github/languages/top/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction?style=flat-square">
-</p>
-
-<p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white">
   <img alt="Open3D" src="https://img.shields.io/badge/Open3D-0.19-1F6FEB?style=flat-square">
   <img alt="NumPy" src="https://img.shields.io/badge/NumPy-2.x-013243?style=flat-square&logo=numpy&logoColor=white">
@@ -17,18 +8,6 @@
   <img alt="MATLAB" src="https://img.shields.io/badge/MATLAB-tools-E16737?style=flat-square&logo=mathworks&logoColor=white">
   <img alt="Platform" src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey?style=flat-square">
 </p>
-
-<p align="center">
-  <img alt="Tests" src="https://img.shields.io/badge/pytest-209%20passed%20%7C%203%20need%20data-brightgreen?style=flat-square&logo=pytest&logoColor=white">
-  <img alt="Lines of Python" src="https://img.shields.io/badge/Python-42k%20LOC-3572A5?style=flat-square&logo=python&logoColor=white">
-  <img alt="Target" src="https://img.shields.io/badge/target-multispectral%20LiDAR%20%7C%206--band-blueviolet?style=flat-square">
-  <img alt="Data" src="https://img.shields.io/badge/data-not%20included-blue?style=flat-square">
-  <img alt="Patents" src="https://img.shields.io/badge/patent%20material-excluded-inactive?style=flat-square">
-</p>
-
-<!-- 访问量徽章（可选，第三方服务，按需启用）：
-  <img alt="Visitors" src="https://visitor-badge.laobi.icu/badge?page_id=lucien-lab.Multispectral-Point-Cloud-Registration-and-3D-Reconstruction">
--->
 
 多光谱（高光谱）激光雷达点云的**配准（registration）**与**三维重建 / 处理**代码库。
 
@@ -111,34 +90,28 @@ python pointcloud_generation/visualize_pointcloud.py --help
 
 ## 徽章说明与维护
 
-顶部徽章分两类：
+顶部只保留 6 个表示**运行环境**的静态徽章（均不依赖仓库星标/提交等活动指标）：
 
-| 类型 | 徽章 | 更新方式 |
+| 徽章 | 含义 | 更新时机 |
 | --- | --- | --- |
-| **动态**（自动） | Stars / Forks / Issues / Last commit / Code size / Top language | 由 shields.io 读取 GitHub API，无需手动维护 |
-| **静态**（手动） | Python / Open3D / NumPy / SciPy / MATLAB / Platform | 依赖或环境变化时同步修改 |
-| **静态**（手动） | pytest 测试数、Python LOC、目标模态、数据/专利说明 | 跑完测试后同步修改 |
+| Python 3.11 | 主语言与版本 | 升级解释器版本时 |
+| Open3D 0.19 | 点云处理核心库 | 升级 `open3d` 时 |
+| NumPy 2.x / SciPy 1.x | 数值计算依赖 | 升级依赖时 |
+| MATLAB tools | 含 MATLAB 工具脚本（`matlab/`） | 增删 MATLAB 工具时 |
+| platform macOS \| Linux | 主要验证平台 | 平台支持变化时 |
 
-静态徽章为 shields.io 模板：
+徽章为 shields.io 静态模板：
 
 ```text
 https://img.shields.io/badge/<标签>-<内容>-<颜色>?style=flat-square&logo=<图标>
 ```
 
-示例：`.../badge/pytest-209%20passed%20%7C%203%20need%20data-brightgreen?logo=pytest`
-（空格写作 `%20`，`|` 写作 `%7C`，`-` 写作 `--`）。
+编码规则：空格写作 `%20`，`|` 写作 `%7C`，需要字面量连字符时写作 `--`（如 `6--band`）。
+例如：
 
-**更新测试徽章**：在 `registration/environment.yml` 环境下执行
-
-```bash
-(cd registration && python -m pytest tests -q)
-(cd calibration_and_joint_registration && python -m pytest tests -q)
-(cd pointcloud_processing/cloudclassify && python -m pytest tests -q)
-(cd pointcloud_processing/cloudclassify/classified_pointcloud_viewer && python -m pytest tests -q)
-python -m pytest pointcloud_generation -q
+```markdown
+<img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen?style=flat-square">
 ```
-
-把各次“N passed”相加后替换徽章中的数字（当前：106 + 74 + 7 + 10 + 12 = 209）。
 
 **待启用的徽章**：
 
@@ -154,7 +127,11 @@ python -m pytest pointcloud_generation -q
 ![Tests](https://github.com/lucien-lab/Multispectral-Point-Cloud-Registration-and-3D-Reconstruction/actions/workflows/tests.yml/badge.svg)
 ```
 
-- *访问量*：`README.md` 顶部已保留注释形式的 visitor-badge 写法（第三方服务，需自行启用）。
+- *访问量*（第三方服务，按需自行添加到顶部）：
+
+```markdown
+<img alt="Visitors" src="https://visitor-badge.laobi.icu/badge?page_id=lucien-lab.Multispectral-Point-Cloud-Registration-and-3D-Reconstruction">
+```
 
 ## 引用与许可
 
