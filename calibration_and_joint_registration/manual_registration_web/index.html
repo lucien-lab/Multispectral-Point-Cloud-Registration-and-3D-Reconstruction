@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>手动点云—照片配准</title>
+    <link rel="stylesheet" href="/manual_registration_web/styles.css">
+  </head>
+  <body data-save-state="loading">
+    <main class="instrument" aria-labelledby="page-title">
+      <header class="instrument-header">
+        <div>
+          <p class="eyebrow">高光谱激光雷达 / 相机坐标系</p>
+          <h1 id="page-title">手动点云—照片配准</h1>
+        </div>
+        <div class="header-status">
+          <span class="status-lamp" aria-hidden="true"></span>
+          <span id="save-status" role="status" aria-live="polite">正在加载会话…</span>
+        </div>
+      </header>
+
+      <div id="base-status" class="status-banner status-banner-alert" role="alert" hidden></div>
+      <div id="config-warning" class="status-banner status-banner-warning" role="alert" hidden></div>
+
+      <div class="workspace">
+        <section class="viewport-panel" aria-labelledby="viewport-title">
+          <div class="viewport-heading">
+            <div>
+              <p class="section-code">视图 / 01</p>
+              <h2 id="viewport-title">照片投影</h2>
+            </div>
+            <div class="layer-key" aria-label="点云颜色图例">
+              <span><i class="key-dot key-left"></i>左点云</span>
+              <span><i class="key-dot key-right"></i>右点云</span>
+            </div>
+          </div>
+
+          <div class="canvas-shell" id="canvas-shell">
+            <canvas id="registration-canvas" aria-label="手动照片配准画布" aria-disabled="true" tabindex="0"></canvas>
+            <div class="canvas-message" id="canvas-message" role="alert" hidden></div>
+            <div class="frame-readout frame-readout-x" aria-hidden="true">
+              <span>ΔX</span><output id="frame-x">+0000.0</output>
+            </div>
+            <div class="frame-readout frame-readout-y" aria-hidden="true">
+              <span>ΔY</span><output id="frame-y">+0000.0</output>
+            </div>
+          </div>
+
+          <div class="viewport-footer">
+            <p>拖动：相机 X/Y 平移 · 滚轮：焦距缩放 · 双击参数标签：单项复位</p>
+          </div>
+        </section>
+
+        <aside class="control-rail" aria-label="配准控制">
+          <section class="rail-section" aria-labelledby="geometry-title">
+            <div class="rail-heading">
+              <p class="section-code">坐标系 / 02</p>
+              <h2 id="geometry-title">相机增量</h2>
+            </div>
+
+            <fieldset>
+              <legend>平移 · mm</legend>
+              <div class="axis-tune axis-x">
+                <div class="axis-control">
+                  <label for="translation-x" data-reset-parameter="tx" title="双击复位 X">X</label>
+                  <input id="translation-x" type="number" min="-2000" max="2000" step="0.1" inputmode="decimal" disabled>
+                  <span>mm</span>
+                </div>
+                <label class="sr-only" for="translation-x-slider">X 平移滑块</label>
+                <input id="translation-x-slider" type="range" min="-2000" max="2000" step="1" disabled>
+              </div>
+              <div class="axis-tune axis-y">
+                <div class="axis-control">
+                  <label for="translation-y" data-reset-parameter="ty" title="双击复位 Y">Y</label>
+                  <input id="translation-y" type="number" min="-2000" max="2000" step="0.1" inputmode="decimal" disabled>
+                  <span>mm</span>
+                </div>
+                <label class="sr-only" for="translation-y-slider">Y 平移滑块</label>
+                <input id="translation-y-slider" type="range" min="-2000" max="2000" step="1" disabled>
+              </div>
+              <div class="axis-tune axis-z">
+                <div class="axis-control">
+                  <label for="translation-z" data-reset-parameter="tz" title="双击复位 Z">Z</label>
+                  <input id="translation-z" type="number" min="-2000" max="2000" step="0.1" inputmode="decimal" disabled>
+                  <span>mm</span>
+                </div>
+                <label class="sr-only" for="translation-z-slider">Z 平移滑块</label>
+                <input id="translation-z-slider" type="range" min="-2000" max="2000" step="1" disabled>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>旋转 · XYZ degree</legend>
+              <div class="axis-tune axis-rx">
+                <div class="axis-control">
+                  <label for="rotation-x" data-reset-parameter="rx" title="双击复位 RX">RX</label>
+                  <input id="rotation-x" type="number" min="-30" max="30" step="0.01" inputmode="decimal" disabled>
+                  <span>deg</span>
+                </div>
+                <label class="sr-only" for="rotation-x-slider">RX 旋转滑块</label>
+                <input id="rotation-x-slider" type="range" min="-30" max="30" step="0.1" disabled>
+              </div>
+              <div class="axis-tune axis-ry">
+                <div class="axis-control">
+                  <label for="rotation-y" data-reset-parameter="ry" title="双击复位 RY">RY</label>
+                  <input id="rotation-y" type="number" min="-30" max="30" step="0.01" inputmode="decimal" disabled>
+                  <span>deg</span>
+                </div>
+                <label class="sr-only" for="rotation-y-slider">RY 旋转滑块</label>
+                <input id="rotation-y-slider" type="range" min="-30" max="30" step="0.1" disabled>
+              </div>
+              <div class="axis-tune axis-rz">
+                <div class="axis-control">
+                  <label for="rotation-z" data-reset-parameter="rz" title="双击复位 RZ">RZ</label>
+                  <input id="rotation-z" type="number" min="-30" max="30" step="0.01" inputmode="decimal" disabled>
+                  <span>deg</span>
+                </div>
+                <label class="sr-only" for="rotation-z-slider">RZ 旋转滑块</label>
+                <input id="rotation-z-slider" type="range" min="-30" max="30" step="0.1" disabled>
+              </div>
+            </fieldset>
+
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="projection-zoom" data-reset-parameter="zoom" title="双击复位焦距缩放">焦距缩放</label>
+                <output id="projection-zoom-value" for="projection-zoom">1.00×</output>
+              </div>
+              <input id="projection-zoom" type="range" min="0.5" max="2" step="0.01" disabled>
+            </div>
+          </section>
+
+          <section class="rail-section" aria-labelledby="display-title">
+            <div class="rail-heading">
+              <p class="section-code">显示 / 03</p>
+              <h2 id="display-title">图层渲染</h2>
+            </div>
+            <div class="toggle-row">
+              <label for="show-left">显示左点云</label>
+              <input id="show-left" type="checkbox" disabled>
+            </div>
+            <div class="toggle-row">
+              <label for="show-right">显示右点云</label>
+              <input id="show-right" type="checkbox" disabled>
+            </div>
+            <div class="slider-control compact">
+              <div class="slider-label">
+                <label for="point-opacity">点透明度</label>
+                <output id="point-opacity-value" for="point-opacity">75%</output>
+              </div>
+              <input id="point-opacity" type="range" min="0" max="1" step="0.01" disabled>
+            </div>
+            <div class="slider-control compact">
+              <div class="slider-label">
+                <label for="point-size">点大小</label>
+                <output id="point-size-value" for="point-size">3.0 px</output>
+              </div>
+              <input id="point-size" type="range" min="0.5" max="8" step="0.1" disabled>
+            </div>
+            <div class="slider-control compact">
+              <div class="slider-label">
+                <label for="photo-brightness">照片亮度</label>
+                <output id="photo-brightness-value" for="photo-brightness">1.00×</output>
+              </div>
+              <input id="photo-brightness" type="range" min="0.25" max="2" step="0.01" disabled>
+            </div>
+          </section>
+
+          <section class="rail-section metrics-section" aria-labelledby="metrics-title">
+            <div class="rail-heading metrics-heading">
+              <div>
+                <p class="section-code">拟合 / 04</p>
+                <h2 id="metrics-title">投影指标</h2>
+              </div>
+              <span id="metrics-source">本地</span>
+            </div>
+            <dl class="metrics-grid">
+              <div><dt>图像内</dt><dd id="metric-in-frame">—</dd></div>
+              <div><dt>可见点</dt><dd id="metric-visible">—</dd></div>
+              <div><dt>覆盖率</dt><dd id="metric-coverage">—</dd></div>
+              <div><dt>控制点中位</dt><dd id="metric-control-median">—</dd></div>
+              <div><dt>控制点最大</dt><dd id="metric-control-max">—</dd></div>
+              <div><dt>当前焦距</dt><dd id="metric-focal">—</dd></div>
+            </dl>
+          </section>
+
+          <div class="history-actions" aria-label="编辑历史">
+            <button id="undo-button" type="button" disabled>撤销</button>
+            <button id="redo-button" type="button" disabled>重做</button>
+            <button id="reset-button" class="danger-button" type="button" disabled>重置自动结果</button>
+          </div>
+          <div class="primary-actions">
+            <button id="save-button" class="save-button" type="button" disabled>保存配置</button>
+            <button id="export-button" type="button" disabled>导出点云</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="/manual_registration_web/app.js"></script>
+  </body>
+</html>

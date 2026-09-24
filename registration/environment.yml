@@ -1,0 +1,11 @@
+name: ms_pointcloud_midterm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=2.4.6
+  - scipy=1.17.1
+  - matplotlib=3.11.0
+  - pip
+  - pip:
+      - open3d==0.19.0

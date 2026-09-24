@@ -1,0 +1,121 @@
+{
+  "seed": 42,
+  "trial_count": 20,
+  "max_rotation_deg": 10.0,
+  "max_translation_m": 0.5,
+  "voxel_sizes_m": [0.2, 0.1, 0.05],
+  "max_correspondence_distances_m": [0.8, 0.4, 0.2],
+  "max_iterations": [80, 50, 30],
+  "evaluation_max_correspondence_m": 0.2,
+  "success_rotation_deg": 2.0,
+  "success_translation_m": 0.1,
+  "lambda_geometric_rgb": 0.968,
+  "lambda_geo_spectral": 0.968,
+  "lambda_spec_spectral": 0.032,
+  "output_dir": "results/spectral6_recommended_experiment",
+  "data": {
+    "left_prepared": "data/processed/left_points.npz",
+    "right_prepared": "data/processed/right_points.npz"
+  },
+  "calibration": {
+    "max_correspondence_m": 0.1,
+    "normal_angle_deg": 30.0,
+    "normal_radius_m": 0.25,
+    "min_pairs": 100,
+    "gain_min": 0.25,
+    "gain_max": 4.0,
+    "soft_l1_scale": 0.02,
+    "weight_floor": 0.05,
+    "weight_ceiling": 0.35
+  },
+  "robust_registration": {
+    "lambda_spec_schedules_round1": [
+      [0.02, 0.05, 0.1],
+      [0.03, 0.08, 0.15],
+      [0.05, 0.1, 0.2],
+      [0.02, 0.1, 0.25]
+    ],
+    "lambda_spec_schedules_round2_extra": [
+      [0.01, 0.03, 0.06],
+      [0.05, 0.15, 0.3],
+      [0.1, 0.2, 0.35],
+      [0.02, 0.15, 0.35]
+    ],
+    "huber_delta_geo": 1.5,
+    "huber_delta_spec": 1.5,
+    "min_gradient_neighbors": 8,
+    "max_gradient_condition": 100.0,
+    "normal_angle_deg": 45.0,
+    "min_correspondences": 30,
+    "trim_fraction": 0.7,
+    "gradient_max_nn": 50,
+    "gradient_irls_iterations": 5
+  },
+  "registration_validation": {
+    "voxel_size_m": 0.1,
+    "max_correspondence_m": 0.3,
+    "trim_fraction": 0.7,
+    "min_correspondences": 30,
+    "min_relative_improvement": 0.005,
+    "max_coverage_drop": 0.02,
+    "overlap_weight": 0.2,
+    "attribute_clip_sigma": 3.0,
+    "normal_angle_deg": 45.0,
+    "huber_delta_geo": 1.5,
+    "huber_delta_spec": 1.5,
+    "gradient_radius_multiplier": 2.5,
+    "gradient_max_nn": 50,
+    "min_gradient_neighbors": 8,
+    "max_gradient_condition": 100.0,
+    "gradient_irls_iterations": 5
+  },
+  "protocol": {
+    "overlap_tolerance_pct": 1.0
+  },
+  "coarse_registration": {
+    "enabled": true,
+    "feature_radius_multiplier": 5.0,
+    "candidate_count": 8,
+    "ransac_n": 3,
+    "max_iterations": 30000,
+    "confidence": 0.999,
+    "max_rotation_deg": 25.0,
+    "max_translation_m": 1.25,
+    "score_max_distance_m": 0.3,
+    "trim_fraction": 0.7,
+    "min_correspondences": 30,
+    "min_coverage": 0.1,
+    "min_score_improvement": 0.03,
+    "methods": {
+      "geometry": {
+        "config_id": "geometry_v0.10_n3.0_o0.10",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 3.0,
+        "lambda_geo": 0.9,
+        "lambda_attribute": 0.0,
+        "lambda_overlap": 0.1
+      },
+      "rgb": {
+        "config_id": "rgb_v0.10_f2.0_d0.20",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 2.0,
+        "attribute_feature_weight": 2.0,
+        "lambda_geo": 0.64,
+        "lambda_attribute": 0.16,
+        "lambda_overlap": 0.2
+      },
+      "spectral6": {
+        "config_id": "spectral6_v0.10_f2.0_d0.30",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 2.0,
+        "attribute_feature_weight": 2.0,
+        "lambda_geo": 0.56,
+        "lambda_attribute": 0.24,
+        "lambda_overlap": 0.2
+      }
+    }
+  }
+}

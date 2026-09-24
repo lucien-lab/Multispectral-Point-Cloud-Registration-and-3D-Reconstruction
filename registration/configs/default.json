@@ -1,0 +1,89 @@
+{
+  "seed": 42,
+  "trial_count": 10,
+  "max_rotation_deg": 10.0,
+  "max_translation_m": 0.5,
+  "voxel_sizes_m": [
+    0.2,
+    0.1,
+    0.05
+  ],
+  "max_correspondence_distances_m": [
+    0.8,
+    0.4,
+    0.2
+  ],
+  "max_iterations": [
+    80,
+    50,
+    30
+  ],
+  "evaluation_max_correspondence_m": 0.2,
+  "lambda_geometric_rgb": 0.968,
+  "lambda_geo_spectral": 0.968,
+  "lambda_spec_spectral": 0.032,
+  "registration_validation": {
+    "voxel_size_m": 0.1,
+    "max_correspondence_m": 0.3,
+    "trim_fraction": 0.7,
+    "min_correspondences": 30,
+    "min_relative_improvement": 0.005,
+    "max_coverage_drop": 0.02,
+    "overlap_weight": 0.2,
+    "attribute_clip_sigma": 3.0
+  },
+  "coarse_registration": {
+    "enabled": true,
+    "feature_radius_multiplier": 5.0,
+    "candidate_count": 8,
+    "ransac_n": 3,
+    "max_iterations": 30000,
+    "confidence": 0.999,
+    "max_rotation_deg": 25.0,
+    "max_translation_m": 1.25,
+    "score_max_distance_m": 0.3,
+    "trim_fraction": 0.7,
+    "min_correspondences": 30,
+    "min_coverage": 0.1,
+    "min_score_improvement": 0.03,
+    "methods": {
+      "geometry": {
+        "config_id": "geometry_v0.10_n3.0_o0.10",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 3.0,
+        "lambda_geo": 0.9,
+        "lambda_attribute": 0.0,
+        "lambda_overlap": 0.1
+      },
+      "rgb": {
+        "config_id": "rgb_v0.10_f2.0_d0.20",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 2.0,
+        "attribute_feature_weight": 2.0,
+        "lambda_geo": 0.64,
+        "lambda_attribute": 0.16,
+        "lambda_overlap": 0.2
+      },
+      "spectral6": {
+        "config_id": "spectral6_v0.10_f2.0_d0.30",
+        "voxel_size_m": 0.1,
+        "max_correspondence_m": 0.15,
+        "normal_radius_multiplier": 2.0,
+        "attribute_feature_weight": 2.0,
+        "lambda_geo": 0.56,
+        "lambda_attribute": 0.24,
+        "lambda_overlap": 0.2
+      }
+    }
+  },
+  "success_rotation_deg": 2.0,
+  "success_translation_m": 0.1,
+  "data": {
+    "left_input": "data/processed/left_refined_input.npz",
+    "right_input": "data/processed/right_refined_input.npz",
+    "left_prepared": "data/processed/left_points.npz",
+    "right_prepared": "data/processed/right_points.npz"
+  }
+}

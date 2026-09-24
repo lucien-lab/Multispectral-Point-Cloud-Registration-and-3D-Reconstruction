@@ -1,0 +1,20 @@
+# 多光谱激光雷达点云配准与三维重建 — 依赖
+# 核心科学计算
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+
+# 点云处理
+open3d>=0.17
+scikit-learn>=1.3
+
+# 图像与可视化交互
+Pillow>=10.0
+
+# 手动配准 Web 工具后端
+Flask>=3.0
+Werkzeug>=3.0
+
+# 测试
+pytest>=7.4

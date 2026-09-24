@@ -1,0 +1,9 @@
+# JSSS pipeline - core dependencies
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+
+# optional
+open3d>=0.17        # ICP/NDT loop verification (Sec. 6.6.3 of the paper)
+scikit-learn>=1.3   # metric learning (Sec. 6.6.2)

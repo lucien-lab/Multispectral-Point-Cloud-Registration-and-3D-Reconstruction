@@ -1,0 +1,122 @@
+# ============================================================
+# 数据（原始点云 / 采集数据 / 实验结果，一律不入库）
+# ============================================================
+*.bin
+*.ply
+*.pcd
+*.npz
+*.npy
+*.mat
+*.las
+*.laz
+*.e57
+*.pt
+*.pth
+*.onnx
+*.zip
+
+# 结果表格与点云文本导出
+*.csv
+*.txt
+!requirements.txt
+!**/requirements.txt
+
+# 图像 / 可视化输出
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.svg
+*.pdf
+!docs/**/*.pdf
+
+# 数据目录
+data/
+dat/
+dataset/
+datasets/
+*/data/
+*/dat/
+results/
+output/
+outputs/
+*/output/
+*/pointcloud_output/
+*/geometry_only/
+*/recalibrated_color/
+*/calibration_output/
+joint_registration_output/
+logs/
+runs/
+cache/
+.cache-*
+
+# ============================================================
+# 论文 / 报告文档（不入库，只保留代码）
+# ============================================================
+*.docx
+*.doc
+*.tex
+*.bib
+*.drawio
+*.pptx
+*.xlsx
+paper/
+papers/
+docs/papers/
+论文/
+报告/
+reports/
+drafts/
+reviews/
+reviews_*/
+*_unpacked/
+paper_backups/
+中期报告*
+开题报告*
+
+# ============================================================
+# 专利材料（明确不纳入本仓库）
+# ============================================================
+patent/
+**/patent/
+**/patent_*
+**/*patent*
+*专利*
+专利申请/
+专利申请*/
+similar_patents*/
+
+# ============================================================
+# Python / 环境 / IDE
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.asv
+.superpowers/
+.worktrees/
+*.log
+
+# ============================================================
+# 系统 / 编辑器
+# ============================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
