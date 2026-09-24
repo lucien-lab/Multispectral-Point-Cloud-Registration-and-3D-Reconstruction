@@ -74,7 +74,7 @@ reflectance[channel] = (
 生成左右彩色点云：
 
 ```bash
-cd /Users/lucien/workspace/graduate-study/papers/3_28/20260328
+cd pointcloud_generation   # 本目录（仓库根目录下）
 python3 generate_pointcloud.py --sides left right
 ```
 

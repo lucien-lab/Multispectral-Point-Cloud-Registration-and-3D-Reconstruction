@@ -144,7 +144,7 @@ export XDG_CACHE_HOME="$PWD/.cache"
 以下命令均应在本目录执行：
 
 ```bash
-cd /Users/lucien/workspace/graduate-study/papers/ICP_ws
+cd baselines/icp_registration   # 仓库根目录下
 ```
 
 ### 5.1 检查输入点云
