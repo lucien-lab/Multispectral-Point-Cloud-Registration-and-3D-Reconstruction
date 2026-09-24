@@ -15,9 +15,9 @@ from PIL import Image, ImageCms
 from color_calibration_core import CURRENT_WHITE, SOURCE_WHITE, WAVELENGTHS_NM
 
 
-PROJECT_DIR = Path(__file__).resolve().parents[2]
-SCRIPT = PROJECT_DIR / "20260328" / "calibrate_white_from_photo.py"
-POINTCLOUD_OUTPUT = PROJECT_DIR / "20260328" / "pointcloud_output"
+PROJECT_DIR = Path(__file__).resolve().parents[1]
+SCRIPT = PROJECT_DIR / "calibrate_white_from_photo.py"
+POINTCLOUD_OUTPUT = PROJECT_DIR / "pointcloud_output"
 
 REFLECTANCE_COLUMNS = [f"rfl_{value}_nm" for value in WAVELENGTHS_NM]
 REQUIRED_COLUMNS = [
@@ -219,7 +219,7 @@ class CalibrationCliTest(unittest.TestCase):
 
     def _run(self, mode="--fit", output=None, *extra):
         environment = os.environ.copy()
-        environment["PYTHONPATH"] = str(PROJECT_DIR / "20260328")
+        environment["PYTHONPATH"] = str(PROJECT_DIR)
         return subprocess.run(
             self._command(mode, output, *extra),
             cwd=PROJECT_DIR,

@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-SOURCE_SCRIPT = Path(
-    "/Users/lucien/workspace/graduate-study/papers/3_28/20260328/activity_room_experiment.py"
+SOURCE_SCRIPT = (
+    Path(__file__).resolve().parents[2] / "reconstruction" / "activity_room_experiment.py"
 )
 OUTPUT = Path(__file__).resolve().parent / "activity_room_registration_y_axis_view.png"
 

@@ -41,15 +41,16 @@ pip install -r requirements.txt
 ## 快速开始
 
 ```bash
-# 1) 光谱/几何联合配准实验（读 registration/configs 配置）
+# 1) 光谱/几何联合配准实验（配置见 registration/configs/）
 python registration/run_experiment.py --help
 python registration/run_spectral_recommended_experiment.py --help
 python registration/tune_coarse_registration.py --help
 
-# 2) 运行回归测试
-pytest registration/tests -q
-pytest pointcloud_generation -q
-pytest calibration_and_joint_registration/tests -q
+# 2) 回归测试（测试脚本按相对路径查找脚本/数据，需在对应模块目录下运行）
+cd registration && python -m pytest tests -q ; cd ..
+cd calibration_and_joint_registration && python -m pytest tests -q ; cd ..
+cd pointcloud_processing/cloudclassify && python -m pytest tests -q ; cd ../../..
+python -m pytest pointcloud_generation -q
 
 # 3) 由原始 bin 生成点云（自行准备自己的数据目录）
 python pointcloud_generation/generate_pointcloud.py --help
@@ -59,6 +60,14 @@ python pointcloud_generation/visualize_pointcloud.py --help
 ```
 
 数据路径均通过命令行参数或配置项传入，仓库内**不含**任何数据文件，示例数据请按脚本 `--help` 中的目录约定自行准备。
+
+测试现状（`registration/environment.yml` 环境实测）：
+
+- `registration/tests`：106 通过 / 1 跳过；`test_pipeline.py::test_raw_data_links_are_repository_relative` 需要 `data/raw/*.bin` 符号链接，缺数据时失败。
+- `calibration_and_joint_registration/tests`：74 通过。
+- `pointcloud_generation`：7 通过。
+- `pointcloud_processing/cloudclassify`：10 通过 / 2 失败（用例直接读取真实点云文本，缺数据时失败）。
+- `pointcloud_processing/cloudclassify/classified_pointcloud_viewer`：12 通过。
 
 ---
 
